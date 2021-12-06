@@ -37,13 +37,12 @@ impl FishPopulation {
 
     fn calculate_growht(&mut self, days: usize) -> usize {
         for _ in 0..days {
-            let mut buf = [0; 9];
-            for i in (1..9).rev() {
-                buf[i - 1] = self.population[i];
+            let zeroes = self.population[0];
+            for i in 0..8 {
+                self.population[i] = self.population[i + 1];
             }
-            buf[8] = self.population[0];
-            buf[6] += self.population[0];
-            self.population = buf;
+            self.population[8] = zeroes;
+            self.population[6] += zeroes;
         }
         self.population.iter().sum()
     }
